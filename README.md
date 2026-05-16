@@ -281,7 +281,7 @@ All input passes through a mandatory safety pipeline before any model computatio
 ## Author
 
 **Rahul Sarkar** — India
-GitHub: [github.com/litonsarkar3988-max](https://github.com/litonsarkar3988-max)
+GitHub: [github.com/Sarkar-AGI](https://github.com/Sarkar-AGI)
 
 ---
 
