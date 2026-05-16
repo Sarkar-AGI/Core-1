@@ -1,0 +1,84 @@
+# ======================================
+# TITANCORE GPT-4o CONFIGURATION
+# ======================================
+
+model:
+  name: titancore-gpt4o
+  vocab_size: 400000
+  block_size: 8192
+  n_layer: 120
+  n_head: 128
+  n_embd: 16384
+  rotary_emb: true
+  rope_theta: 1000000
+
+attention:
+  type: flash_v2
+  causal: true
+  kv_cache: paged
+  kv_block_size: 16          # FIXED: renamed from block_size to avoid confusion with model block_size
+  sliding_window: 4096
+
+mlp:
+  type: swiglu                # FIXED: added type field for clarity
+  hidden_mult: 4
+  activation: swiglu
+  n_experts: 8               # FIXED: added MoE config consistent with block.cpp
+  top_k: 2
+
+parallelism:
+  tensor: 4
+  pipeline: 2
+  data: 4                    # FIXED: was 8, now matches cluster.yaml data_parallel: 4
+  fsdp: true
+
+quantization:
+  enabled: true
+  weight: int4
+  activation: fp8
+  kv_cache: fp16
+
+runtime:
+  max_batch: 512             # FIXED: was 256, now matches cluster.yaml global_batch: 512
+  micro_batch: 16            # FIXED: added to match cluster.yaml micro_batch: 16
+  continuous_batching: true
+  speculative_decoding: true
+  prefix_cache: true
+  stream_count: 8
+
+vision:
+  enabled: true
+  encoder: vit_large
+  image_size: 1024
+
+audio:
+  enabled: true
+  whisper_backend: turbo
+
+retrieval:
+  enabled: true
+  faiss_gpu: true
+  top_k: 8
+
+safety:
+  moderation: true
+  jailbreak_detection: true
+  rate_limit_rpm: 60         # FIXED: was rate_limit_rps: 200, now matches safety.yaml requests_per_minute: 60
+
+api:
+  host: 0.0.0.0
+  port: 8080
+  auth: jwt
+
+monitoring:
+  prometheus: true
+  metrics_interval: 5
+
+logging:
+  level: info
+  trace_cuda: false
+
+system:
+  cuda_graphs: true
+  nvlink: true
+  numa_affinity: true

@@ -1,0 +1,88 @@
+# ==========================================
+# TITANCORE SUPERCOMPUTER CLUSTER CONFIG
+# ==========================================
+
+cluster:
+  name: titancore-prod
+  backend: nccl
+  scheduler: titan
+
+nodes:
+
+  - id: node0
+    host: 10.0.0.1
+    gpus: 8
+    gpu_type: H100
+    role: master
+    nvlink: true
+
+  - id: node1
+    host: 10.0.0.2
+    gpus: 8
+    gpu_type: H100
+    role: worker
+    nvlink: true              # FIXED: added nvlink flag (consistent with node0)
+
+  - id: node2
+    host: 10.0.0.3
+    gpus: 8
+    gpu_type: H100
+    role: worker
+    nvlink: true              # FIXED: added nvlink flag
+
+  - id: node3
+    host: 10.0.0.4
+    gpus: 8
+    gpu_type: H100
+    role: worker
+    nvlink: true              # FIXED: added nvlink flag
+
+parallelism:
+  tensor_parallel: 4
+  pipeline_parallel: 2
+  data_parallel: 4           # FIXED: was already 4, confirmed consistent with gpt4o.yaml
+  total_gpus: 32             # ADDED: 4 nodes × 8 GPUs for clarity
+
+network:
+  fabric: infiniband
+  bandwidth_gbps: 400
+  nccl_algo: ring
+  timeout_sec: 60
+
+memory:
+  kv_cache_sharding: true
+  offload_cpu: false
+  unified_memory: false
+
+batching:
+  global_batch: 512
+  micro_batch: 16
+  continuous: true
+
+routing:
+  strategy: round_robin
+  failover: true
+  max_queue: 2048
+
+fault_tolerance:
+  checkpoint_interval_sec: 300
+  auto_restart: true
+  max_restart_attempts: 3    # ADDED: bounded restart policy
+
+monitoring:
+  prometheus: true
+  node_exporter: true
+  gpu_metrics: true
+  metrics_port: 9090         # ADDED: standard Prometheus port
+
+security:
+  mutual_tls: true
+  api_auth: jwt
+
+storage:
+  model_weights: /mnt/models
+  kv_cache: /mnt/kv
+  logs: /mnt/logs            # ADDED: log storage path
+
+logging:
+  level: info
