@@ -1,4 +1,4 @@
-# TitanCore: Core-1 AGI
+# TitanCore: Core-1 AGI 
 
 ### Distributed Artificial General Intelligence Engine — Trillion-Parameter Scale
 
