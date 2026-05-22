@@ -2,7 +2,7 @@
 
 ### Distributed Artificial General Intelligence Engine — Trillion-Parameter Scale
 
-TitanCore **Core-1** is a full-stack AGI engine built in **C++17 and CUDA**. It combines a 120-layer Mixture-of-Experts Transformer with a complete cognitive architecture: persistent memory, structured reasoning, goal-directed planning, meta-learning, world modelling, and continuous online learning — all running across multi-node GPU clusters. 
+TitanCore **Core-1** is a full-stack AGI engine built in **C++17 and CUDA**. It combines a 120-layer Mixture-of-Experts Transformer with a complete cognitive architecture: persistent memory, structured reasoning, goal-directed planning, meta-learning, world modelling, and continuous online learning — all running across multi-node GPU clusters.  
 
 ---
 
