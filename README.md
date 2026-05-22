@@ -10,7 +10,7 @@ TitanCore **Core-1** is a full-stack AGI engine built in **C++17 and CUDA**. It 
 
 | Property | Detail |
 |---|---|
-| Version | 1.0.0 |
+| Version | 1.0.0 | 
 | Release Date | February 2026 |
 | Status | AGI Framework — Inference-Ready |
 | Tokenization | Custom BPE — 400,000 token vocabulary |
