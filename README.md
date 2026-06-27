@@ -272,7 +272,7 @@ All input passes through a mandatory safety pipeline before any model computatio
 | 11 | Tool use & function calling | Complete |
 | 12 | Full YAML config parser (yaml-cpp) | In Progress |
 | 13 | GGUF weight loader & quantized inference | In Progress |
-| 14 | 500T token pre-training run | Planned |
+| 14 | 13T token pre-training run | Planned |
 | 15 | RLHF alignment pipeline | Planned |
 | 16 | Public API release | Planned |
 
